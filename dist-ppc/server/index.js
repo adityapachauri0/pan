@@ -93,6 +93,21 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
+// API base route
+app.get('/api', (req, res) => {
+  res.json({
+    service: SERVICE_NAME,
+    version: '2.0.0',
+    status: 'operational',
+    endpoints: {
+      contact: 'POST /api/contact',
+      portfolio: 'GET /api/portfolio',
+      health: 'GET /health-status',
+      metrics: 'GET /metrics'
+    }
+  });
+});
+
 // Portfolio route
 app.get('/api/portfolio', (req, res) => {
   const projects = [

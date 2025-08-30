@@ -1,0 +1,23 @@
+{
+  "name": "panchroma",
+  "version": "1.0.0",
+  "description": "Panchroma Website Development - Professional Web Design Services",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm start",
+    "dev:server": "cd server && npm run dev",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "deploy": "./deploy.sh",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "test": "cd client && npm test",
+    "preview": "cd client/build && npx serve -s ."
+  },
+  "keywords": ["website", "design", "development", "joomla", "wordpress", "cms"],
+  "author": "Panchroma",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

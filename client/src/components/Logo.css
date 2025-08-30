@@ -1,0 +1,20 @@
+.logo-container {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .logo-container span {
+    font-size: 2rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-container span {
+    font-size: 1.75rem !important;
+  }
+}

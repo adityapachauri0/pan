@@ -363,3 +363,13 @@
     padding: 0.4rem 0.8rem;
   }
 }
+
+/* Platform showcase hover effects */
+.platform-item:hover .platform-glow {
+  opacity: 1 !important;
+}
+
+.platform-item:hover .platform-card {
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  transform: translateY(-2px);
+}

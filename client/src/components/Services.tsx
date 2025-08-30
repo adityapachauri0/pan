@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { 
   FaCode, 
   FaMobile, 
@@ -10,6 +11,7 @@ import {
   FaPalette,
   FaShieldAlt 
 } from 'react-icons/fa';
+import { PlatformLogo } from './icons/PlatformLogos';
 import './Services.css';
 
 const services = [
@@ -58,6 +60,16 @@ const services = [
 ];
 
 const Services: React.FC = () => {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+
+  const platforms = [
+    'Google Ads', 'Facebook', 'Instagram', 'TikTok', 'LinkedIn',
+    'Twitter/X', 'Snapchat', 'Pinterest', 'YouTube', 'Taboola',
+    'Outbrain', 'Reddit', 'Quora', 'Amazon DSP', 'Microsoft Ads',
+    'Apple Search', 'Spotify', 'Podcast Ads', 'Display Networks', 
+    'Email', 'SMS'
+  ];
+
   return (
     <section className="services section">
       <div className="container">
@@ -108,6 +120,103 @@ const Services: React.FC = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* 20+ Platforms Showcase */}
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="platforms-showcase"
+          style={{ marginTop: '80px' }}
+        >
+          <div className="section-header" style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <h3 style={{ 
+              fontSize: 'clamp(2rem, 4vw, 3rem)', 
+              fontWeight: 'bold', 
+              color: 'white', 
+              marginBottom: '16px' 
+            }}>
+              20+ Digital Channels At Your Disposal
+            </h3>
+            <p style={{ 
+              fontSize: '1.25rem', 
+              color: '#9CA3AF', 
+              maxWidth: '600px', 
+              margin: '0 auto' 
+            }}>
+              From web to mobile to cloud, we leverage every technology to deliver your perfect solution
+            </p>
+          </div>
+          
+          <div style={{ position: 'relative' }}>
+            <div style={{
+              position: 'absolute',
+              inset: '0',
+              background: 'linear-gradient(to right, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))',
+              borderRadius: '24px',
+              filter: 'blur(48px)'
+            }}/>
+            <div style={{
+              position: 'relative',
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(16px)',
+              borderRadius: '24px',
+              padding: '32px',
+              border: '1px solid rgba(255, 255, 255, 0.1)'
+            }}>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
+                gap: '24px',
+                justifyItems: 'center'
+              }}>
+                {platforms.map((platform, idx) => (
+                  <motion.div
+                    key={platform}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: 0.8 + idx * 0.05 }}
+                    whileHover={{ scale: 1.1, y: -5 }}
+                    style={{
+                      textAlign: 'center',
+                      cursor: 'pointer'
+                    }}
+                    className="platform-item"
+                  >
+                    <div style={{ position: 'relative' }}>
+                      <div style={{
+                        position: 'absolute',
+                        inset: '0',
+                        background: 'linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2))',
+                        borderRadius: '12px',
+                        filter: 'blur(12px)',
+                        opacity: '0',
+                        transition: 'opacity 0.3s'
+                      }} className="platform-glow"/>
+                      <div style={{
+                        position: 'relative',
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        borderRadius: '12px',
+                        padding: '16px',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        transition: 'all 0.3s'
+                      }} className="platform-card">
+                        <PlatformLogo name={platform} className="w-8 h-8 mx-auto mb-2" />
+                        <p style={{
+                          color: 'white',
+                          fontSize: '0.75rem',
+                          fontWeight: '600',
+                          margin: '0'
+                        }}>{platform}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

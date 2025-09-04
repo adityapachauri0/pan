@@ -194,7 +194,7 @@ const LiveChat: React.FC = () => {
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
             className={`chat-widget ${isMinimized ? 'minimized' : ''}`}

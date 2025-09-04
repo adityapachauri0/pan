@@ -236,7 +236,7 @@ export const ValidatedInput: React.FC<ValidatedInputProps> = ({
         )}
       </div>
       
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {hasErrors && (
           <motion.div
             id={errorId}
@@ -310,7 +310,7 @@ export const ValidatedTextarea: React.FC<ValidatedTextareaProps> = ({
         aria-describedby={hasErrors ? errorId : undefined}
       />
       
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {hasErrors && (
           <motion.div
             id={errorId}

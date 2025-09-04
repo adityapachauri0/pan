@@ -1,0 +1,67 @@
+# Page snapshot
+
+```yaml
+- main [ref=e3]:
+  - link "Skip to main content" [ref=e4] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e7]:
+    - generic [ref=e9]:
+      - generic [ref=e10]:
+        - img [ref=e12]
+        - heading "Panchroma" [level=1] [ref=e14]
+        - paragraph [ref=e15]: Building Digital Excellence for Modern Businesses
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - img [ref=e19]
+          - generic [ref=e21]:
+            - heading "Analytics Dashboard" [level=3] [ref=e22]
+            - paragraph [ref=e23]: Track your business metrics in real-time
+        - generic [ref=e24]:
+          - img [ref=e26]
+          - generic [ref=e28]:
+            - heading "Secure & Reliable" [level=3] [ref=e29]
+            - paragraph [ref=e30]: Enterprise-grade security for your data
+        - generic [ref=e31]:
+          - img [ref=e33]
+          - generic [ref=e35]:
+            - heading "User Management" [level=3] [ref=e36]
+            - paragraph [ref=e37]: Comprehensive contact and project management
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - img [ref=e43]
+          - heading "Welcome Back" [level=2] [ref=e45]
+          - paragraph [ref=e46]: Sign in to your Panchroma dashboard
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]: Username or Email
+            - generic [ref=e50]:
+              - img [ref=e52]
+              - textbox "Username or Email" [ref=e54]
+          - generic [ref=e55]:
+            - generic [ref=e56]: Password
+            - generic [ref=e57]:
+              - img [ref=e59]
+              - textbox "Password" [ref=e61]
+              - button [ref=e62]:
+                - img [ref=e63]
+          - generic [ref=e66]:
+            - checkbox "Remember me" [ref=e67]
+            - generic [ref=e68]: Remember me
+          - button "Sign In" [disabled] [ref=e69]:
+            - img [ref=e70]
+            - text: Sign In
+          - paragraph [ref=e73]: Need access? Contact your administrator
+      - generic [ref=e74]:
+        - heading "Demo Credentials" [level=3] [ref=e75]:
+          - img [ref=e76]
+          - text: Demo Credentials
+        - generic [ref=e78]:
+          - paragraph [ref=e79]:
+            - generic [ref=e80]: "Username:"
+            - generic [ref=e81]: admin
+          - paragraph [ref=e82]:
+            - generic [ref=e83]: "Password:"
+            - generic [ref=e84]: admin123
+  - region "Notifications Alt+T"
+```

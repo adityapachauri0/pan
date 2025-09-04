@@ -1,0 +1,178 @@
+/* Global Shake Prevention - Ultimate Fix */
+
+/* Reset all animations to use smooth timing */
+*,
+*::before,
+*::after {
+  /* Smooth all transitions */
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  
+  /* Enable hardware acceleration */
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  /* Prevent text rendering issues */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Prevent layout shifts */
+  contain: layout style;
+}
+
+/* Override any transform-based animations */
+@keyframes gentleFloat {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -5px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* Apply to all floating elements */
+.floating,
+.float,
+[class*="float"],
+[class*="Float"],
+.animated-shape,
+.floating-shape,
+.floating-element {
+  animation-name: gentleFloat !important;
+  animation-duration: 6s !important;
+  animation-timing-function: ease-in-out !important;
+  animation-iteration-count: infinite !important;
+  transform-origin: center center !important;
+}
+
+/* Stabilize Framer Motion elements */
+[data-framer-component-type],
+.framer-motion-config,
+[style*="transform"] {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Prevent AnimatePresence shaking */
+[data-framer-portal-id] {
+  position: fixed !important;
+  pointer-events: none !important;
+}
+
+/* Fix for motion divs */
+div[style*="opacity: 0"] {
+  pointer-events: none !important;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Prevent button shake on hover */
+button,
+a,
+.clickable,
+[role="button"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform-origin: center center;
+}
+
+button:hover,
+a:hover,
+.clickable:hover,
+[role="button"]:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Cards and interactive elements */
+.card,
+.service-card,
+.portfolio-item,
+.pricing-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.card:hover,
+.service-card:hover,
+.portfolio-item:hover,
+.pricing-card:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* Disable intense animations */
+@keyframes none {
+  0%, 100% { transform: none; }
+}
+
+/* Emergency shake stopper */
+.no-shake,
+.stable,
+[data-stable="true"] {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+/* Performance optimization for animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .floating,
+  .float,
+  [class*="float"],
+  .animated-shape,
+  .floating-shape {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) and (hover: none) {
+  .floating,
+  .float,
+  [class*="float"],
+  .animated-shape,
+  .floating-shape,
+  .floating-element {
+    animation: none !important;
+    transform: translateZ(0) !important;
+  }
+  
+  /* Disable hover effects on touch devices */
+  button:hover,
+  a:hover,
+  .card:hover,
+  .service-card:hover {
+    transform: none !important;
+  }
+}
+
+/* High performance mode */
+@media (min-width: 1920px) {
+  * {
+    will-change: auto !important;
+  }
+  
+  .animated {
+    will-change: transform, opacity !important;
+  }
+}

@@ -14,10 +14,23 @@
     "test": "cd client && npm test",
     "preview": "cd client/build && npx serve -s ."
   },
-  "keywords": ["website", "design", "development", "joomla", "wordpress", "cms"],
+  "keywords": [
+    "website",
+    "design",
+    "development",
+    "joomla",
+    "wordpress",
+    "cms"
+  ],
   "author": "Panchroma",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^7.6.0"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.55.0",
+    "playwright": "^1.55.0",
+    "puppeteer": "^24.19.0",
+    "sharp": "^0.34.3"
   }
 }

@@ -1,0 +1,214 @@
+/* Animation fixes to prevent shaking */
+
+/* Reduce float animation intensity - ULTRA SMOOTH */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-3px) translateX(2px);
+  }
+  50% {
+    transform: translateY(2px) translateX(-2px);
+  }
+  75% {
+    transform: translateY(-2px) translateX(2px);
+  }
+}
+
+/* Smoother pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+/* Smoother glow pulse */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* Fix for gradient animations */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fix AnimatePresence children warnings */
+.framer-motion-config {
+  position: relative;
+}
+
+/* Prevent layout shift during animations */
+[data-framer-motion-exit] {
+  position: absolute !important;
+  width: 100%;
+}
+
+/* Stabilize hero section animations */
+.hero-section * {
+  will-change: auto;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.hero-section .animated-shape,
+.hero-section .floating-shape {
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: 40s !important;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+/* Reduce animation intensity on scroll */
+.scroll-animated {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fix for card hover effects */
+.card:hover {
+  transition: transform 0.3s ease-out;
+}
+
+/* Stabilize navigation animations */
+.navbar {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Fix for live chat animations */
+.chat-widget {
+  will-change: auto;
+}
+
+.typing-indicator span {
+  animation-duration: 1.4s !important;
+  animation-timing-function: ease-in-out !important;
+}
+
+/* Reduce background animation intensity */
+@keyframes backgroundShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Fix for dark mode toggle */
+.dark-mode-toggle {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark-mode-toggle.rotating {
+  animation: rotate360 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth transitions for theme changes */
+:root,
+[data-theme] {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Fix for service cards */
+.service-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/* Stabilize portfolio items */
+.portfolio-item {
+  will-change: auto;
+  transform: translateZ(0);
+}
+
+/* Fix for CTA section animations */
+.cta-section .floating-element {
+  animation-duration: 25s !important;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Global animation performance improvements */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent animation conflicts */
+.animating {
+  pointer-events: none;
+}
+
+/* Hardware acceleration for smoother animations */
+.animated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.animated.revealed {
+  will-change: auto;
+}
+
+/* Global shake prevention */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent any shaking during transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Override any conflicting animations */
+.floating-element,
+.float-animation,
+[class*="float"] {
+  animation-duration: 35s !important;
+  animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+}
+
+/* Disable problematic animations on mobile */
+@media (max-width: 768px) {
+  .floating-element,
+  .float-animation,
+  [class*="float"],
+  .animated-shape,
+  .floating-shape {
+    animation: none !important;
+    transform: none !important;
+  }
+}

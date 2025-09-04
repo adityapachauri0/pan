@@ -1,173 +1,152 @@
-// Accessibility utilities and helpers
+// Accessibility utilities
+export const a11y = {
+  // Announce to screen readers
+  announce: (message: string, priority: 'polite' | 'assertive' = 'polite') => {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', priority);
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.style.position = 'absolute';
+    announcement.style.left = '-10000px';
+    announcement.style.width = '1px';
+    announcement.style.height = '1px';
+    announcement.style.overflow = 'hidden';
+    announcement.textContent = message;
+    
+    document.body.appendChild(announcement);
+    setTimeout(() => document.body.removeChild(announcement), 1000);
+  },
 
-// Focus management
-export const trapFocus = (element: HTMLElement) => {
-  const focusableElements = element.querySelectorAll(
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-  );
-  const firstElement = focusableElements[0] as HTMLElement;
-  const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+  // Skip link management
+  skipLinks: {
+    create: () => {
+      const skipNav = document.createElement('a');
+      skipNav.href = '#main-content';
+      skipNav.className = 'skip-link';
+      skipNav.textContent = 'Skip to main content';
+      return skipNav;
+    }
+  },
 
-  const handleTabKey = (e: KeyboardEvent) => {
-    if (e.key === 'Tab') {
-      if (e.shiftKey) {
-        if (document.activeElement === firstElement) {
-          lastElement.focus();
-          e.preventDefault();
+  // Focus management
+  focus: {
+    trap: (element: HTMLElement) => {
+      const focusableElements = element.querySelectorAll(
+        'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select'
+      );
+      const firstFocusable = focusableElements[0] as HTMLElement;
+      const lastFocusable = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+      element.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+              lastFocusable.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === lastFocusable) {
+              firstFocusable.focus();
+              e.preventDefault();
+            }
+          }
         }
-      } else {
-        if (document.activeElement === lastElement) {
-          firstElement.focus();
-          e.preventDefault();
-        }
+      });
+    },
+
+    restore: (previousFocus: HTMLElement | null) => {
+      if (previousFocus && previousFocus.focus) {
+        previousFocus.focus();
       }
     }
-  };
+  },
 
-  element.addEventListener('keydown', handleTabKey);
-  return () => element.removeEventListener('keydown', handleTabKey);
-};
+  // Keyboard navigation
+  keyboard: {
+    isNavigationKey: (key: string) => {
+      return ['Enter', ' ', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(key);
+    },
 
-// Announce to screen readers
-export const announce = (message: string, priority: 'polite' | 'assertive' = 'polite') => {
-  const announcement = document.createElement('div');
-  announcement.setAttribute('aria-live', priority);
-  announcement.setAttribute('aria-atomic', 'true');
-  announcement.setAttribute('class', 'sr-only');
-  announcement.textContent = message;
-  
-  document.body.appendChild(announcement);
-  
-  setTimeout(() => {
-    document.body.removeChild(announcement);
-  }, 1000);
-};
+    handleListNavigation: (e: KeyboardEvent, items: NodeListOf<HTMLElement> | HTMLElement[]) => {
+      const currentIndex = Array.from(items).findIndex(item => item === document.activeElement);
+      let nextIndex = currentIndex;
 
-// Keyboard navigation helpers
-export const handleKeyboardNavigation = (
-  e: KeyboardEvent,
-  items: HTMLElement[],
-  currentIndex: number,
-  onSelect?: (index: number) => void
-) => {
-  let newIndex = currentIndex;
+      switch (e.key) {
+        case 'ArrowDown':
+          nextIndex = (currentIndex + 1) % items.length;
+          break;
+        case 'ArrowUp':
+          nextIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+          break;
+        case 'Home':
+          nextIndex = 0;
+          break;
+        case 'End':
+          nextIndex = items.length - 1;
+          break;
+        default:
+          return;
+      }
 
-  switch (e.key) {
-    case 'ArrowDown':
-      e.preventDefault();
-      newIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0;
-      break;
-    case 'ArrowUp':
-      e.preventDefault();
-      newIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1;
-      break;
-    case 'Home':
-      e.preventDefault();
-      newIndex = 0;
-      break;
-    case 'End':
-      e.preventDefault();
-      newIndex = items.length - 1;
-      break;
-    case 'Enter':
-    case ' ':
-      e.preventDefault();
-      onSelect?.(currentIndex);
-      return currentIndex;
-    case 'Escape':
-      e.preventDefault();
-      (e.target as HTMLElement).blur();
-      return currentIndex;
-  }
+      if (nextIndex !== currentIndex) {
+        (items[nextIndex] as HTMLElement).focus();
+        e.preventDefault();
+      }
+    }
+  },
 
-  if (newIndex !== currentIndex) {
-    items[newIndex]?.focus();
-    return newIndex;
-  }
+  // ARIA helpers
+  aria: {
+    setExpanded: (element: HTMLElement, expanded: boolean) => {
+      element.setAttribute('aria-expanded', String(expanded));
+    },
 
-  return currentIndex;
-};
+    setSelected: (element: HTMLElement, selected: boolean) => {
+      element.setAttribute('aria-selected', String(selected));
+    },
 
-// Color contrast checker
-export const checkContrast = (foreground: string, background: string): number => {
-  const getRGB = (color: string) => {
-    const hex = color.replace('#', '');
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-    return [r, g, b];
-  };
+    setPressed: (element: HTMLElement, pressed: boolean) => {
+      element.setAttribute('aria-pressed', String(pressed));
+    },
 
-  const getLuminance = (rgb: number[]) => {
-    const [r, g, b] = rgb.map(c => {
-      c = c / 255;
-      return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-    });
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  };
+    describedBy: (element: HTMLElement, descriptionId: string) => {
+      element.setAttribute('aria-describedby', descriptionId);
+    },
 
-  const fgLum = getLuminance(getRGB(foreground));
-  const bgLum = getLuminance(getRGB(background));
-  const brightest = Math.max(fgLum, bgLum);
-  const darkest = Math.min(fgLum, bgLum);
+    labelledBy: (element: HTMLElement, labelId: string) => {
+      element.setAttribute('aria-labelledby', labelId);
+    }
+  },
 
-  return (brightest + 0.05) / (darkest + 0.05);
-};
+  // Color contrast checker
+  contrast: {
+    ratio: (color1: string, color2: string): number => {
+      const getLuminance = (color: string) => {
+        const rgb = color.match(/\d+/g);
+        if (!rgb) return 0;
+        
+        const [r, g, b] = rgb.map(val => {
+          const sRGB = parseInt(val) / 255;
+          return sRGB <= 0.03928
+            ? sRGB / 12.92
+            : Math.pow((sRGB + 0.055) / 1.055, 2.4);
+        });
+        
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+      };
 
-// Check if user prefers reduced motion
-export const prefersReducedMotion = (): boolean => {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
+      const l1 = getLuminance(color1);
+      const l2 = getLuminance(color2);
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      
+      return (lighter + 0.05) / (darker + 0.05);
+    },
 
-// ARIA attributes helpers
-export const setAriaExpanded = (element: HTMLElement, expanded: boolean) => {
-  element.setAttribute('aria-expanded', expanded.toString());
-};
-
-export const setAriaSelected = (element: HTMLElement, selected: boolean) => {
-  element.setAttribute('aria-selected', selected.toString());
-};
-
-export const setAriaHidden = (element: HTMLElement, hidden: boolean) => {
-  element.setAttribute('aria-hidden', hidden.toString());
-};
-
-// Generate unique IDs for ARIA relationships
-let idCounter = 0;
-export const generateId = (prefix = 'aria-id'): string => {
-  return `${prefix}-${++idCounter}`;
-};
-
-// Form validation and error announcement
-export const announceFormError = (fieldName: string, errorMessage: string) => {
-  announce(`${fieldName}: ${errorMessage}`, 'assertive');
-};
-
-// Loading state announcement
-export const announceLoadingState = (isLoading: boolean, context: string) => {
-  if (isLoading) {
-    announce(`Loading ${context}...`, 'polite');
-  } else {
-    announce(`${context} loaded`, 'polite');
+    meetsWCAG: (ratio: number, level: 'AA' | 'AAA' = 'AA'): boolean => {
+      return level === 'AA' ? ratio >= 4.5 : ratio >= 7;
+    }
   }
 };
 
-// Navigation announcement
-export const announceNavigation = (pageName: string) => {
-  announce(`Navigated to ${pageName}`, 'polite');
-};
-
-export default {
-  trapFocus,
-  announce,
-  handleKeyboardNavigation,
-  checkContrast,
-  prefersReducedMotion,
-  setAriaExpanded,
-  setAriaSelected,
-  setAriaHidden,
-  generateId,
-  announceFormError,
-  announceLoadingState,
-  announceNavigation
-};
+export default a11y;

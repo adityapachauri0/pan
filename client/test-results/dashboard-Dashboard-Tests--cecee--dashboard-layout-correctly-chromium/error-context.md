@@ -1,0 +1,46 @@
+# Page snapshot
+
+```yaml
+- main [ref=e3]:
+  - link "Skip to main content" [ref=e4] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - heading "Panchroma" [level=1] [ref=e10]
+        - button [ref=e11]:
+          - img [ref=e12]
+      - navigation [ref=e14]:
+        - generic [ref=e15]:
+          - button "Dashboard" [ref=e16]:
+            - img [ref=e17]
+            - text: Dashboard
+          - button "Contacts" [ref=e19]:
+            - img [ref=e20]
+            - text: Contacts
+          - button "Projects" [ref=e22]:
+            - img [ref=e23]
+            - text: Projects
+          - button "Settings" [ref=e25]:
+            - img [ref=e26]
+            - text: Settings
+      - generic [ref=e29]:
+        - img [ref=e32]
+        - generic [ref=e34]:
+          - paragraph [ref=e35]: Admin User
+          - paragraph [ref=e36]: admin
+        - button "Logout" [ref=e37]:
+          - img [ref=e38]
+    - generic [ref=e40]:
+      - generic [ref=e42]:
+        - button [ref=e43]:
+          - img [ref=e44]
+        - heading "Dashboard" [level=2] [ref=e47]
+        - generic [ref=e48]:
+          - button [ref=e49]:
+            - img [ref=e50]
+          - generic [ref=e52]: Welcome back, Admin User
+      - main [ref=e53]:
+        - generic [ref=e57]: Loading dashboard...
+  - region "Notifications Alt+T"
+```

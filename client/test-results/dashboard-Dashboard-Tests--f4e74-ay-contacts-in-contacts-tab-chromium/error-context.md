@@ -1,0 +1,148 @@
+# Page snapshot
+
+```yaml
+- main [ref=e3]:
+  - link "Skip to main content" [ref=e4] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - generic [ref=e7]:
+        - heading "Panchroma" [level=1] [ref=e10]
+        - button [ref=e11]:
+          - img [ref=e12]
+      - navigation [ref=e14]:
+        - generic [ref=e15]:
+          - button "Dashboard" [ref=e16]:
+            - img [ref=e17]
+            - text: Dashboard
+          - button "Contacts" [active] [ref=e19]:
+            - img [ref=e20]
+            - text: Contacts
+          - button "Projects" [ref=e22]:
+            - img [ref=e23]
+            - text: Projects
+          - button "Settings" [ref=e25]:
+            - img [ref=e26]
+            - text: Settings
+      - generic [ref=e29]:
+        - img [ref=e32]
+        - generic [ref=e34]:
+          - paragraph [ref=e35]: Admin User
+          - paragraph [ref=e36]: admin
+        - button "Logout" [ref=e37]:
+          - img [ref=e38]
+    - generic [ref=e40]:
+      - generic [ref=e42]:
+        - button [ref=e43]:
+          - img [ref=e44]
+        - heading "Contacts" [level=2] [ref=e47]
+        - generic [ref=e48]:
+          - button [ref=e49]:
+            - img [ref=e50]
+          - generic [ref=e52]: Welcome back, Admin User
+      - main [ref=e53]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - generic [ref=e57]:
+              - generic [ref=e58]:
+                - heading "Welcome to Panchroma Dashboard 🚀" [level=1] [ref=e59]
+                - paragraph [ref=e60]: Thursday, September 4th, 2025
+              - generic [ref=e61]:
+                - button "Export" [ref=e62]:
+                  - img [ref=e63]
+                  - generic [ref=e65]: Export
+                - button "New Project" [ref=e66]:
+                  - img [ref=e67]
+                  - generic [ref=e69]: New Project
+            - generic [ref=e71]:
+              - button "Overview" [ref=e72]:
+                - img [ref=e73]
+                - generic [ref=e75]: Overview
+              - button "Contacts" [ref=e76]:
+                - img [ref=e77]
+                - generic [ref=e79]: Contacts
+              - button "Projects" [ref=e80]:
+                - img [ref=e81]
+                - generic [ref=e83]: Projects
+          - generic [ref=e84]:
+            - generic [ref=e85]:
+              - generic [ref=e86]:
+                - generic [ref=e87]:
+                  - img [ref=e89]
+                  - generic [ref=e91]:
+                    - img [ref=e92]
+                    - generic [ref=e94]: +15.6%
+                - generic [ref=e95]:
+                  - paragraph [ref=e96]: Total Contacts
+                  - paragraph [ref=e97]: "2847"
+              - generic [ref=e98]:
+                - generic [ref=e99]:
+                  - img [ref=e101]
+                  - generic [ref=e103]:
+                    - img [ref=e104]
+                    - generic [ref=e106]: +22.3%
+                - generic [ref=e107]:
+                  - paragraph [ref=e108]: Active Projects
+                  - paragraph [ref=e109]: "23"
+              - generic [ref=e110]:
+                - generic [ref=e111]:
+                  - img [ref=e113]
+                  - generic [ref=e115]:
+                    - img [ref=e116]
+                    - generic [ref=e118]: +18.4%
+                - generic [ref=e119]:
+                  - paragraph [ref=e120]: Total Revenue
+                  - paragraph [ref=e121]: £287,450
+              - generic [ref=e122]:
+                - generic [ref=e123]:
+                  - img [ref=e125]
+                  - generic [ref=e127]:
+                    - img [ref=e128]
+                    - generic [ref=e130]: +0.8%
+                - generic [ref=e131]:
+                  - paragraph [ref=e132]: Conversion Rate
+                  - paragraph [ref=e133]: 3.2%
+            - generic [ref=e134]:
+              - generic [ref=e136]:
+                - heading "Revenue Trend" [level=3] [ref=e137]
+                - generic [ref=e139]: Revenue
+              - heading "Project Status" [level=3] [ref=e141]
+            - generic [ref=e142]:
+              - generic [ref=e143]:
+                - heading "Recent Activity" [level=3] [ref=e144]
+                - button "View All" [ref=e145]
+              - generic [ref=e146]:
+                - generic [ref=e147]:
+                  - img [ref=e149]
+                  - generic [ref=e151]:
+                    - paragraph [ref=e152]: Website Redesign for Acme Corp
+                    - paragraph [ref=e153]: Design phase completed
+                  - generic [ref=e154]:
+                    - paragraph [ref=e155]: Sep 4, 5:01 AM
+                    - generic [ref=e156]: high
+                - generic [ref=e157]:
+                  - img [ref=e159]
+                  - generic [ref=e161]:
+                    - paragraph [ref=e162]: New lead from Google Ads
+                    - paragraph [ref=e163]: Sarah Johnson - Tech Startup
+                  - generic [ref=e164]:
+                    - paragraph [ref=e165]: Sep 4, 3:01 AM
+                    - generic [ref=e166]: medium
+                - generic [ref=e167]:
+                  - img [ref=e169]
+                  - generic [ref=e171]:
+                    - paragraph [ref=e172]: E-commerce Platform Launch
+                    - paragraph [ref=e173]: Ready for client review
+                  - generic [ref=e174]:
+                    - paragraph [ref=e175]: Sep 4, 1:01 AM
+                    - generic [ref=e176]: high
+                - generic [ref=e177]:
+                  - img [ref=e179]
+                  - generic [ref=e181]:
+                    - paragraph [ref=e182]: Meeting scheduled
+                    - paragraph [ref=e183]: Discovery call with Mike Chen
+                  - generic [ref=e184]:
+                    - paragraph [ref=e185]: Sep 3, 11:01 PM
+                    - generic [ref=e186]: medium
+  - region "Notifications Alt+T"
+```

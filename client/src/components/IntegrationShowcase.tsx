@@ -754,7 +754,7 @@ const IntegrationShowcase: React.FC = () => {
           </motion.div>
         )}
 
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {selectedIntegration && (
             <motion.div 
               className="integration-modal"

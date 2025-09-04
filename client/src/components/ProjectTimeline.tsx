@@ -701,7 +701,7 @@ const ProjectTimeline: React.FC = () => {
           {viewMode === 'kanban' && renderKanbanView()}
         </motion.div>
 
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {selectedMilestone && (
             <motion.div 
               className="milestone-modal"

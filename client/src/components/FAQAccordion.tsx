@@ -283,7 +283,7 @@ const FAQAccordion: React.FC = () => {
             </motion.div>
           ) : (
             <div className="faq-grid">
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 {filteredFAQs.map((item, index) => (
                   <motion.div
                     key={item.id}
@@ -315,7 +315,7 @@ const FAQAccordion: React.FC = () => {
                       </motion.div>
                     </button>
                     
-                    <AnimatePresence>
+                    <AnimatePresence mode="wait">
                       {openItems.has(item.id) && (
                         <motion.div
                           className="faq-answer"

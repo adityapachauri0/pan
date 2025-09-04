@@ -1,0 +1,3 @@
+Name,Email,Subject,Message,Status,Date,IP,Location
+"Location Test 1757020171996","location1757020171996@test.com","Testing IP and Location","This submission should capture my IP address and location (Hyderabad, India)","read","05/09/2025, 02:39:34","49.204.16.99 (dev)","Hyderabad, India"
+"Aditya Pachauri","adityapachaur7@gmail.com","hello","hello","new","05/09/2025, 02:38:28","49.204.16.99 (dev)","Hyderabad, India"

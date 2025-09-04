@@ -639,7 +639,7 @@ const ContactForm: React.FC = () => {
               </div>
             </form>
 
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {submitStatus === 'success' && (
                 <motion.div
                   className="submit-message success"

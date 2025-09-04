@@ -1,0 +1,152 @@
+/* Override ALL float animations for maximum smoothness */
+
+/* Define ultra-smooth float animation */
+@keyframes smoothFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  33% {
+    transform: translate3d(2px, -3px, 0);
+  }
+  66% {
+    transform: translate3d(-2px, 2px, 0);
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -3px, 0) scale(1.01);
+  }
+}
+
+/* Override all float animations globally */
+[class*="float"],
+.floating-shape,
+.animated-shape,
+.floating-element,
+.float-animation {
+  animation-name: smoothFloat !important;
+  animation-duration: 8s !important;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1) !important;
+  animation-iteration-count: infinite !important;
+  animation-fill-mode: both !important;
+  transform-origin: center center !important;
+  will-change: transform !important;
+}
+
+/* Override specific problematic animations */
+.hero-section [class*="float"],
+.hero-section .animated-shape,
+.hero-section .floating-shape {
+  animation: gentleFloat 10s ease-in-out infinite !important;
+}
+
+/* Override CTA animations */
+.cta-section [class*="float"],
+.cta-section .floating-element {
+  animation: subtleFloat 12s ease-in-out infinite !important;
+}
+
+/* Override service card animations */
+.service-card,
+.pricing-card,
+.portfolio-item {
+  transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.4s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+}
+
+.service-card:hover,
+.pricing-card:hover,
+.portfolio-item:hover {
+  transform: translateY(-3px) !important;
+}
+
+/* Override stats animations */
+.stats-section [class*="float"],
+.animated-stats [class*="float"] {
+  animation: none !important;
+  transform: translateZ(0) !important;
+}
+
+/* Override timeline animations */
+.timeline [class*="float"],
+.process-timeline [class*="float"] {
+  animation: gentleFloat 15s ease-in-out infinite !important;
+}
+
+/* Override tech radar animations */
+.tech-radar [class*="float"] {
+  animation: smoothFloat 20s ease-in-out infinite !important;
+}
+
+/* Override FAQ animations */
+.faq-section [class*="float"] {
+  animation: none !important;
+}
+
+/* Override ROI Calculator animations */
+.roi-calculator [class*="float"] {
+  animation: subtleFloat 10s ease-in-out infinite !important;
+}
+
+/* Override Pricing Calculator animations */
+.pricing-calculator [class*="float"] {
+  animation: subtleFloat 12s ease-in-out infinite !important;
+}
+
+/* Override BeforeAfter animations */
+.before-after [class*="float"] {
+  animation: gentleFloat 8s ease-in-out infinite !important;
+}
+
+/* Emergency override for any remaining shaky animations */
+@keyframes noShake {
+  0%, 100% { transform: translateZ(0); }
+}
+
+/* Apply to any element that's still shaking */
+.no-shake,
+[data-no-shake="true"] {
+  animation: noShake 1s linear infinite !important;
+}
+
+/* Disable float on mobile for performance */
+@media (max-width: 768px) {
+  [class*="float"],
+  .floating-shape,
+  .animated-shape,
+  .floating-element {
+    animation: none !important;
+    transform: translateZ(0) !important;
+  }
+}
+
+/* High performance mode for large screens */
+@media (min-width: 1920px) {
+  [class*="float"],
+  .floating-shape,
+  .animated-shape,
+  .floating-element {
+    animation-duration: 10s !important;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: all 0.01ms !important;
+  }
+}

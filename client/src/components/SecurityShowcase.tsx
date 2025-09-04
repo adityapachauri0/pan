@@ -453,7 +453,7 @@ const SecurityShowcase: React.FC = () => {
                 </div>
 
                 <div className="threat-list">
-                  <AnimatePresence>
+                  <AnimatePresence mode="wait">
                     {threats.map((threat) => (
                       <motion.div
                         key={threat.id}

@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isOpen && (
           <motion.div
             className="nav-menu-mobile"

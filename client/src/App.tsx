@@ -1,24 +1,34 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorBoundary from './components/ErrorBoundary';
-import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LiveChat from './components/LiveChat';
 import { usePerformanceMonitor } from './hooks/usePerformanceMonitor';
 import analytics from './utils/analytics';
 import './App.css';
+import './styles/design-system.css';
+import './styles/modern-components.css';
+import './styles/animation-fixes.css';
+import './styles/shake-prevention.css';
+import './styles/animation-override.css';
 import './components/ErrorBoundary.css';
+import DarkModeToggle from './components/DarkModeToggle';
 
-// Lazy load pages for better performance
-const HomePage = React.lazy(() => import('./pages/HomePage'));
-const AboutPage = React.lazy(() => import('./pages/AboutPage'));
-const ServicesPage = React.lazy(() => import('./pages/ServicesPage'));
-const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
-const ContactPage = React.lazy(() => import('./pages/ContactPage'));
+// Import pages directly - fixing lazy loading issue
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import PortfolioPage from './pages/PortfolioPage';
+import ContactPage from './pages/ContactPage';
+import NotFound from './pages/NotFound';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import ThankYouPage from './pages/ThankYouPage';
+
 
 function App() {
   // Initialize performance monitoring
@@ -57,23 +67,72 @@ function App() {
               Skip to main content
             </a>
             
-            <Navbar />
-            
-            <main id="main-content">
-              <Suspense fallback={<LoadingScreen message="Loading page..." />}>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/about" element={<AboutPage />} />
-                  <Route path="/services" element={<ServicesPage />} />
-                  <Route path="/portfolio" element={<PortfolioPage />} />
-                  <Route path="/contact" element={<ContactPage />} />
-                </Routes>
-              </Suspense>
-            </main>
-            
-            <Footer />
-            
-            {process.env.REACT_APP_ENABLE_CHAT === 'true' && <LiveChat />}
+            <Routes>
+              {/* Public website routes with layout */}
+              <Route path="/" element={
+                <>
+                  <Navbar />
+                  <main id="main-content">
+                    <HomePage />
+                  </main>
+                  <Footer />
+                  <DarkModeToggle />
+                  {process.env.REACT_APP_ENABLE_CHAT === 'true' && <LiveChat />}
+                </>
+              } />
+              <Route path="/about" element={
+                <>
+                  <Navbar />
+                  <main id="main-content">
+                    <AboutPage />
+                  </main>
+                  <Footer />
+                  <DarkModeToggle />
+                  {process.env.REACT_APP_ENABLE_CHAT === 'true' && <LiveChat />}
+                </>
+              } />
+              <Route path="/services" element={
+                <>
+                  <Navbar />
+                  <main id="main-content">
+                    <ServicesPage />
+                  </main>
+                  <Footer />
+                  <DarkModeToggle />
+                  {process.env.REACT_APP_ENABLE_CHAT === 'true' && <LiveChat />}
+                </>
+              } />
+              <Route path="/portfolio" element={
+                <>
+                  <Navbar />
+                  <main id="main-content">
+                    <PortfolioPage />
+                  </main>
+                  <Footer />
+                  <DarkModeToggle />
+                  {process.env.REACT_APP_ENABLE_CHAT === 'true' && <LiveChat />}
+                </>
+              } />
+              <Route path="/contact" element={
+                <>
+                  <Navbar />
+                  <main id="main-content">
+                    <ContactPage />
+                  </main>
+                  <Footer />
+                  <DarkModeToggle />
+                  {process.env.REACT_APP_ENABLE_CHAT === 'true' && <LiveChat />}
+                </>
+              } />
+              {/* Login route without layout */}
+              <Route path="/login" element={<Login />} />
+              {/* Dashboard route without layout */}
+              <Route path="/dashboard" element={<Dashboard />} />
+              {/* Thank You page without layout */}
+              <Route path="/thank-you" element={<ThankYouPage />} />
+              {/* 404 Page for all other routes */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
             
             <ToastContainer 
               position="bottom-right"
